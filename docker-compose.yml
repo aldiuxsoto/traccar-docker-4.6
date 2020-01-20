@@ -1,0 +1,27 @@
+version: '2'
+services: 
+
+ mariadb:
+  image: mariadb
+  restart: always
+  hostname: mariadb
+  environment:
+   - MYSQL_ROOT_PASSWORD=my-secret-pw
+  volumes:
+   - mysql:/var/lib/mysql/
+   - ./conf/mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
+
+ traccar:
+  image: aldiuxsoto/traccar-docker-4.6
+  hostname: traccar
+  restart: always
+  ports:
+   - "5000-5150:5000-5150"
+   - "8082:8082"
+  volumes:
+   - traccar-db:/opt/traccar/data/database
+   - ./conf/traccar.xml:/opt/traccar/conf/traccar.xml
+
+volumes:
+ traccar-db:
+ mysql:
