@@ -12,7 +12,7 @@ services:
    - ./conf/mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
 
  traccar:
-  image: aldiuxsoto/traccar-docker-4.6
+  image: traccar/traccar
   hostname: traccar
   restart: always
   ports:
